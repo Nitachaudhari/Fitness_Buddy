@@ -5,12 +5,14 @@ import { useAuth } from "../../context/AuthContext";
 import { collection, query, where, getDocs, addDoc, doc, getDoc } from "firebase/firestore";
 import { Box, Container, Heading, VStack, HStack, Button, Card, CardHeader, CardBody, Avatar, Text, Select, Slider, SliderTrack, SliderFilledTrack, SliderThumb, Tag, TagLabel, SimpleGrid, useToast, Progress } from "@chakra-ui/react";
 import { Activity, MapPin, Target, Weight, Calendar, Users } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 const BuddyFinder = () => {
   const { user } = useAuth();
   const [potentialBuddies, setPotentialBuddies] = useState([]);
   const [loading, setLoading] = useState(true);
   const toast = useToast();
+  const navigate = useNavigate();
   
   const [filters, setFilters] = useState({
     goalType: "",
@@ -29,8 +31,8 @@ const BuddyFinder = () => {
   };
 
   useEffect(() => {
-    if (user){
-        fetchPotentialBuddies();
+    if (user) {
+      fetchPotentialBuddies();
     }
   }, [filters, user]);
 
@@ -119,63 +121,6 @@ const BuddyFinder = () => {
   };
 
   console.log(user)
-  const sendBuddyRequest = async (buddyId) => {
-    try {
-      // Ensure the user is authenticated
-      if (!user) {
-        toast({
-          title: "Not Authenticated",
-          description: "You need to be logged in to send a buddy request.",
-          status: "error",
-          duration: 3000,
-        });
-        return;
-      }
-  
-      // Create a buddy request in Firestore (using buddyRequests collection)
-      const requestsRef = collection(db, "buddyRequests",requestId);
-  
-      await addDoc(requestsRef, {
-        senderId: user.uid,      // The ID of the person sending the request
-        recipientId: buddyId,    // The ID of the person receiving the request
-        status: "pending",       // The request status (pending until accepted or rejected)
-        createdAt: new Date(),
-      });
-  
-      // Notify the recipient about the buddy request (optional)
-      const userRef = doc(db, "users", buddyId);
-      const userSnap = await getDoc(userRef);
-  
-      if (userSnap.exists()) {
-        const buddy = userSnap.data();
-        
-        // Optionally, add a notification for the recipient (e.g., under their profile)
-        const notificationsRef = collection(db, "users", buddyId, "notifications");
-  
-        await addDoc(notificationsRef, {
-          message: `${user.displayName} has sent you a buddy request!`,
-          createdAt: new Date(),
-          type: "buddy-request", // Custom type for tracking different notifications
-          seen: false,
-        });
-  
-        toast({
-          title: "Request Sent!",
-          description: "We've notified them about your request.",
-          status: "success",
-          duration: 3000,
-        });
-      }
-    } catch (error) {
-      console.error("Error sending buddy request:", error);
-      toast({
-        title: "Error",
-        description: "Failed to send buddy request.",
-        status: "error",
-        duration: 3000,
-      });
-    }
-  };
 
   return (
     <Container maxW="800px" py="4">
@@ -290,9 +235,9 @@ const BuddyFinder = () => {
                         size="sm"
                         colorScheme="blue"
                         leftIcon={<Users size={16} />}
-                        onClick={() => sendBuddyRequest(buddy.id)}
+                        onClick={() => navigate(`/message/${buddy.id}`)} // Navigate to messaging page
                       >
-                        Send Buddy Request
+                        Send Message
                       </Button>
                     </VStack>
                   </HStack>

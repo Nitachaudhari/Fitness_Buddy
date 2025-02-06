@@ -4,7 +4,7 @@ import { db } from "../services/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, FormControl, FormLabel, Input, VStack, Heading } from "@chakra-ui/react";
-
+import React from "react";
 const EditProfile = () => {
   const { user } = useAuth();
   const [profile, setProfile] = useState({
