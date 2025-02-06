@@ -5,26 +5,28 @@ import { db } from "../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import {
-  Box, Button, Heading, Text, VStack, Grid, Container, Card, CardHeader, CardBody, SimpleGrid, Divider, Stat,
-  StatLabel, StatNumber,Alert,AlertIcon,AlertTitle,AlertDescription, Icon, Flex, useColorModeValue
+  Box, Button, Heading, Text, VStack, SimpleGrid, Container, Card, CardHeader, CardBody, Stat,
+  StatLabel, StatNumber, Alert, AlertIcon, AlertTitle, AlertDescription, Icon, Flex, useColorModeValue
 } from "@chakra-ui/react";
 import { FiTarget, FiActivity, FiCalendar, FiUser, FiUsers } from "react-icons/fi";
 
 const Dashboard = () => {
-  const { user} = useAuth();
+  const { user } = useAuth();
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
   const bgColor = useColorModeValue("white", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.700");
 
   useEffect(() => {
-    if (!user) return;
+    // if (!user) {
+    //   return;
+    // }
 
     const fetchProfile = async () => {
       try {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
-
+        // console.log("id is",user.uid)
         if (docSnap.exists()) {
           setProfile(docSnap.data());
         } else {
@@ -36,7 +38,7 @@ const Dashboard = () => {
     };
 
     fetchProfile();
-  }, [user, navigate]);
+  }, [user, navigate]); // Only runs when user or navigate changes
 
   if (!user) {
     return (
@@ -68,7 +70,7 @@ const Dashboard = () => {
           <Flex gap="4">
             <Button
               colorScheme="green"
-              leftIcon={<FiUsers />} // Add this import from react-icons/fi
+              leftIcon={<FiUsers />}
               onClick={() => navigate("/find-buddy")}
             >
               Find Buddy
@@ -76,41 +78,22 @@ const Dashboard = () => {
             <Button colorScheme="blue" onClick={() => navigate("/edit-profile")}>
               Edit Profile
             </Button>
-            {/* <Button colorScheme="red" onClick={handleLogout}>
-              Logout
-            </Button> */}
           </Flex>
         </Flex>
 
         {profile.location && (
           <Box mb="6" p="4" bg={bgColor} borderRadius="md" borderColor={borderColor} borderWidth={1}>
             <Text fontSize="lg">
-              <strong>Location:</strong> City:{profile.city}  lat:{profile.location.lat} lng:{profile.location.lng}
+              <strong>Location:</strong> City: {profile.city} lat: {profile.location.lat} lng: {profile.location.lng}
             </Text>
           </Box>
         )}
 
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing="4">
-          <StatCard
-            icon={FiUser}
-            label="Current Weight"
-            value={`${profile.currentWeight || "N/A"} kg`}
-          />
-          <StatCard
-            icon={FiTarget}
-            label="Target Weight"
-            value={`${profile.targetWeight || "N/A"} kg`}
-          />
-          <StatCard
-            icon={FiActivity}
-            label="Weekly Goal"
-            value={`${profile.weeklyGoal || "N/A"} kg`}
-          />
-          <StatCard
-            icon={FiCalendar}
-            label="Workout Frequency"
-            value={`${profile.workoutFrequency || "N/A"}/week`}
-          />
+          <StatCard icon={FiUser} label="Current Weight" value={`${profile.currentWeight || "N/A"} kg`} />
+          <StatCard icon={FiTarget} label="Target Weight" value={`${profile.targetWeight || "N/A"} kg`} />
+          <StatCard icon={FiActivity} label="Weekly Goal" value={`${profile.weeklyGoal || "N/A"} kg`} />
+          <StatCard icon={FiCalendar} label="Workout Frequency" value={`${profile.workoutFrequency || "N/A"}/week`} />
         </SimpleGrid>
 
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing="6">
@@ -152,12 +135,7 @@ const Dashboard = () => {
           <CardBody>
             <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing="4">
               {profile.specificGoals?.map((goal, index) => (
-                <Box
-                  key={index}
-                  p="3"
-                  borderRadius="md"
-                  bg={useColorModeValue("blue.50", "blue.900")}
-                >
+                <Box key={index} p="3" borderRadius="md" bg={useColorModeValue("blue.50", "blue.900")}>
                   <Text>✔ {goal}</Text>
                 </Box>
               )) || <Text>No specific goals set</Text>}

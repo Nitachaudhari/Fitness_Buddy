@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { db } from "../services/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 import {
   Box, Button, Input, Select, VStack, Heading,
   Text, Checkbox, Grid, FormControl, FormLabel, Card,

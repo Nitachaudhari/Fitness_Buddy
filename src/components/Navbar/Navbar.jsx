@@ -37,27 +37,27 @@ const Navbar = () => {
 
         <Flex as="ul" listStyleType="none" spacing={4} align="center">
           <Box as="li" mx={2}>
-            <NavLink to="/" activeClassName="active-link">
+            <NavLink to="/" activeclassname="active-link">
               Home
             </NavLink>
           </Box>
           <Box as="li" mx={2}>
-            <NavLink to="/dashboard" activeClassName="active-link">
+            <NavLink to="/dashboard" activeclassname="active-link">
               Dashboard
             </NavLink>
           </Box>
           <Box as="li" mx={2}>
-            <NavLink to="/" activeClassName="active-link">
+            <NavLink to="/" activeclassname="active-link">
               Tips
             </NavLink>
           </Box>
           <Box as="li" mx={2}>
-            <NavLink to="/about" activeClassName="active-link">
+            <NavLink to="/about" activeclassname="active-link">
               About us
             </NavLink>
           </Box>
           <Box as="li" mx={2}>
-            <NavLink to="/contact" activeClassName="active-link">
+            <NavLink to="/contact" activeclassname="active-link">
               Contact us
             </NavLink>
           </Box>
@@ -65,7 +65,7 @@ const Navbar = () => {
           {/* Display Login if user is not logged in */}
           {!user ? (
             <Box as="li" mx={2}>
-              <NavLink to="/authform" activeClassName="active-link">
+              <NavLink to="/authform" activeclassname="active-link">
                 <Button leftIcon={<LogIn />} colorScheme="teal">
                   Login
                 </Button>
