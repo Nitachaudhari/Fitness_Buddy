@@ -44,9 +44,6 @@ const Home = () => {
   return (
     <>
       <div className="home-container">
-        <div className="image-container">
-          <img src={fit} alt="Fit Image" className="fit-image" />
-        </div>
         <div className="text-container">
           <div className="headline">
             <span>Have a personal trainer </span>
