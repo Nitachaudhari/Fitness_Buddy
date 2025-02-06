@@ -9,6 +9,7 @@ import AuthForms from './components/AuthForm'
 import EditProfile from './Pages/EditProfile'
 import BuddyFinder from './components/BuddyMatching/BuddyFinder'
 import { Routes, Route } from "react-router-dom";
+import FitnessLibrary from './components/FitnessLibrary/FitnessLibrary'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/find-buddy" element={<BuddyFinder/>} />
         <Route path="/edit-profile" element={<EditProfile/>}/>
+        <Route path="/fitness-library" element={<FitnessLibrary/>}/>
         {/* <Route path="*" element={<NotFount />} /> */}
       </Routes>
       <Footer />
