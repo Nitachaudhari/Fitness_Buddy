@@ -3,7 +3,6 @@
     height: 100vh;
 }
 
-
 .text-container {
     margin-top: 100px;
     position: absolute;
@@ -44,6 +43,43 @@
     }
 }
 
+/* Responsive Adjustments */
+
+/* For devices with a max-width of 768px (tablets and medium devices) */
+@media (max-width: 768px) {
+    .text-container {
+        /* Adjust vertical position and center horizontally */
+        top: 35%;
+        left: 50%;
+    }
+
+    .image-container {
+        /* Adjust vertical position and center horizontally */
+        top: 25%;
+        left: 50%;
+    }
+}
+
+/* For devices with a max-width of 480px (mobile devices) */
+@media (max-width: 480px) {
+    .text-container {
+        /* Further adjust positions for smaller screens */
+        top: 40%;
+        left: 50%;
+        margin-top: 50px;
+        /* Optionally reduce the top margin */
+        /* Optionally adjust font-size or other properties */
+        font-size: 0.9rem;
+    }
+
+    .image-container {
+        /* Adjust image position for mobile devices */
+        top: 30%;
+        left: 50%;
+    }
+}
+
+/* Base Styles */
 .fit-image {
     width: 8vw;
     height: auto;
@@ -103,11 +139,13 @@
     justify-content: center;
     align-items: center;
     min-height: 80vh;
+    padding: 20px;
+    /* added some padding for smaller screens */
+    text-align: center;
 }
 
 .featured-in {
     text-align: center;
-
 }
 
 .featured-in-title {
@@ -143,7 +181,110 @@
     color: #333;
 }
 
+/* Responsive Styles */
 
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 992px) {
+    .headline {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .subheadline {
+        font-size: 1.75rem;
+        margin: 15px;
+    }
+
+    .store-links {
+        left: 50%;
+        /* center the store links on tablet devices */
+        transform: translateX(-50%);
+        gap: 15px;
+    }
+
+    .store-logo {
+        width: 130px;
+    }
+
+    .featured-in-title {
+        font-size: 22px;
+        margin: 15px;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 768px) {
+    .fit-image {
+        width: 10vw;
+        /* adjust if needed for smaller viewports */
+    }
+
+    .headline {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .subheadline {
+        font-size: 1.5rem;
+        margin: 10px;
+    }
+
+    .store-links {
+        bottom: 15px;
+        gap: 10px;
+    }
+
+    .store-logo {
+        width: 110px;
+    }
+
+    .featured {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .featured-in-logos {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 576px) {
+    .headline {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
+
+    .subheadline {
+        font-size: 1.2rem;
+        margin: 8px;
+    }
+
+    .store-links {
+        position: static;
+        /* allow the layout to flow naturally */
+        transform: none;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .store-logo {
+        width: 90px;
+    }
+
+    .featured-in-title {
+        font-size: 20px;
+        margin: 10px;
+    }
+
+    .featured-in-quote {
+        font-size: 12px;
+    }
+}
+
+
+/* Base Styles */
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -185,8 +326,6 @@ h2 {
     gap: 20px;
 }
 
-
-
 .feature {
     background-color: rgb(169, 202, 202);
     padding: 20px;
@@ -196,8 +335,6 @@ h2 {
     align-items: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-
 
 .feature:hover {
     transform: translateY(-5px);
@@ -226,10 +363,7 @@ h2 {
     height: 100%;
     object-fit: contain;
     opacity: 0.7;
-
 }
-
-
 
 h3 {
     font-size: 1.5rem;
@@ -244,16 +378,20 @@ p {
     line-height: 1.5;
 }
 
+/* Responsive Styles */
+
+/* For devices with a width of 768px or less (small tablets & landscape mobiles) */
 @media screen and (max-width: 768px) {
     .container {
         flex-direction: column;
         align-items: center;
         text-align: center;
+        padding: 30px 10px;
     }
 
     .iphone-image {
         width: 80%;
-        margin-bottom: 20px;
+        margin: 0 auto 20px auto;
     }
 
     .text-content {
@@ -265,6 +403,39 @@ p {
         width: 100%;
     }
 }
+
+/* For devices with a width of 480px or less (smartphones) */
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 20px 10px;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    .iphone-image {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 15px;
+    }
+
+    .text-content {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .feature {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
 
 
 
@@ -396,6 +567,7 @@ p {
     object-fit: cover;
 }
 
+/* Tablet and Smaller Laptops */
 @media (max-width: 768px) {
     .content-wrapper {
         grid-template-columns: 1fr;
@@ -408,6 +580,30 @@ p {
 
     .program-title {
         font-size: 2rem;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+    .fitness-section {
+        padding: 2rem 1rem;
+    }
+
+    .program-title {
+        font-size: 1.75rem;
+    }
+
+    .program-description {
+        font-size: 1rem;
+    }
+
+    .rating-number {
+        font-size: 1.5rem;
+    }
+
+    .tag {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
     }
 }
 
@@ -525,6 +721,9 @@ p {
     background: #3498db;
 }
 
+/* Responsive Styles */
+
+/* Tablets and small laptops (max-width: 768px) */
 @media (max-width: 768px) {
     .slider-container {
         height: 400px;
@@ -532,10 +731,7 @@ p {
         min-width: 280px;
     }
 
-    .image-wrapper {
-        min-width: 280px;
-    }
-
+    .image-wrapper,
     .slider-image {
         min-width: 280px;
     }
@@ -550,6 +746,7 @@ p {
     }
 }
 
+/* Mobile Phones (max-width: 480px) */
 @media (max-width: 480px) {
     .slider-container {
         height: 300px;
@@ -564,6 +761,20 @@ p {
     }
 }
 
+/* Extra adjustments for very large screens (min-width: 1600px) */
+@media (min-width: 1600px) {
+    .slider-content {
+        padding: 3rem;
+    }
+
+    .slider-heading {
+        font-size: 3rem;
+    }
+
+    .slider-container {
+        height: 900px;
+    }
+}
 
 
 
@@ -587,12 +798,14 @@ p {
     max-width: 1250px;
     border-radius: 10px;
     overflow: hidden;
+    width: 100%;
 }
 
 .tracking-image {
     width: 500px;
     height: auto;
     border-radius: 10px 0 0 10px;
+    object-fit: cover;
 }
 
 .tracking-text {
@@ -614,6 +827,46 @@ p {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+/* Responsive Styles */
+
+/* For tablets and small laptops */
+@media (max-width: 768px) {
+    .tracking-content {
+        flex-direction: column;
+    }
+
+    .tracking-image {
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .tracking-text {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .tracking-description {
+        margin: 20px;
+        font-size: 1.1rem;
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+    .tracking-section {
+        padding: 20px;
+    }
+
+    .tracking-title {
+        font-size: 1.5rem;
+    }
+
+    .tracking-description {
+        font-size: 1rem;
+        margin: 15px;
+    }
+}
+
 /* Meal Section */
 .meal-section {
     background: #111;
@@ -624,7 +877,6 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-around;
-
     padding: 20px;
     margin: 20px auto;
     max-width: 1250px;
@@ -633,7 +885,6 @@ p {
 }
 
 .text-content p {
-
     color: white;
     font-size: 1.5rem;
 }
@@ -666,4 +917,53 @@ p {
     max-width: 150px;
     margin-right: 20px;
     border-radius: 10px;
+}
+
+/* Responsive Styles */
+
+/* Tablets and small laptops */
+@media (max-width: 768px) {
+
+    .meal-content,
+    .man-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .meal-image,
+    .man-image {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .text-content p {
+        font-size: 1.3rem;
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+
+    .meal-section,
+    .man-section {
+        padding: 30px 10px;
+    }
+
+    .meal-content,
+    .man-content {
+        padding: 15px;
+        margin: 15px auto;
+    }
+
+    .text-content p {
+        font-size: 1.2rem;
+    }
+
+    .meal-image {
+        max-width: 300px;
+    }
+
+    .man-image {
+        max-width: 120px;
+    }
 }
