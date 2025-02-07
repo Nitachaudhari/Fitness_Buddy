@@ -5,6 +5,7 @@ import Footer from './Pages/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
 import { Routes, Route } from 'react-router-dom';
 import PageNotFound from './Pages/PageNotFound/PageNotFound';
+import About from './Pages/AboutUs/About';
 const App = () => {
   return (
     <>
@@ -12,6 +13,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
