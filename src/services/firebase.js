@@ -4,12 +4,14 @@ import { getFirestore } from "firebase/firestore";
 import { GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDATC2DPn3vkszCcowDhCQL6o0-j5n4XFI",
-    authDomain: "fitnessbuddy-c754e.firebaseapp.com",
-    projectId: "fitnessbuddy-c754e",
-    storageBucket: "fitnessbuddy-c754e.firebasestorage.app",
-    messagingSenderId: "959285213908",
-    appId: "1:959285213908:web:c6fbfc039a7f88a2455941"
+  apiKey: "AIzaSyB6yjQIm_ny-bHyeBC-O3EGyOGpiwWcOI4",
+  authDomain: "e-commerce-fdfc9.firebaseapp.com",
+  databaseURL: "https://e-commerce-fdfc9-default-rtdb.firebaseio.com",
+  projectId: "e-commerce-fdfc9",
+  storageBucket: "e-commerce-fdfc9.firebasestorage.app",
+  messagingSenderId: "430636310650",
+  appId: "1:430636310650:web:d1c1fcddaa2934d79fdbc3",
+  measurementId: "G-6FMSESSH3H"
 };
 
 const app = initializeApp(firebaseConfig);

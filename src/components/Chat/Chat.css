@@ -1,0 +1,135 @@
+/* General chat container */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f7fc;
+    padding: 20px;
+    box-sizing: border-box;
+    max-width: 500px;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Messages container */
+.messages {
+    width: 100%;
+    max-height: 75%;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 10px;
+    /* Added padding to prevent message overflow */
+}
+
+/* Individual message styling */
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
+}
+
+.message .user {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.message .text {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Message input area */
+.message-input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.message-input input {
+    width: 80%;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+}
+
+.message-input input:focus {
+    border-color: #007bff;
+}
+
+.message-input button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.message-input button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .chat-container {
+        width: 90%;
+        max-width: 400px;
+    }
+
+    .message-input input {
+        width: 70%;
+    }
+
+    .message-input button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .messages {
+        max-height: 60%;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-container {
+        width: 95%;
+        max-width: 350px;
+    }
+
+    .message-input input {
+        width: 60%;
+    }
+
+    .message-input button {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    .message .text {
+        font-size: 14px;
+    }
+
+    .message .user {
+        font-size: 12px;
+    }
+
+    .messages {
+        max-height: 55%;
+    }
+}

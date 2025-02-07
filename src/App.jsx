@@ -27,8 +27,8 @@ const App = () => {
         {/* <Route path="*" element={<NotFount />} /> */}
       </Routes>
       <Footer />
-    </div>
-  )
-}
+    </>
+  );
+};
 
 export default App;
