@@ -81,9 +81,9 @@ const EditProfile = () => {
   };
 
   return (
-    <Box maxW="500px" mx="auto" mt="10" p="5" borderWidth="1px" borderRadius="lg">
-      <VStack spacing="5">
-        <Heading>Edit Profile</Heading>
+    <Box maxW="500px" mx="auto" mt="10" mb="10" p="5" borderWidth="1px" borderRadius="lg" bg="white">
+      <VStack spacing="3">
+        <Heading mb="2">Edit Profile</Heading>
 
         <FormControl>
           <FormLabel>Name</FormLabel>
@@ -121,7 +121,7 @@ const EditProfile = () => {
         </FormControl>
 
         {/* Body Measurements Section */}
-        <Heading size="md">Body Measurements (cm)</Heading>
+        <Heading size="md" mb="1">Body Measurements (inch)</Heading>
 
         <FormControl>
           <FormLabel>Chest</FormLabel>
