@@ -44,7 +44,6 @@ const Home = () => {
   return (
     <>
       <div className="home-container">
-
         <div className="text-container">
           <div className="headline">
             <span>Have a personal trainer </span>

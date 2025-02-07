@@ -1,84 +1,90 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './Navbar.css';
+import { Button, Box, Flex, Text } from '@chakra-ui/react';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from "react-router-dom";
+import { LogIn, LogOut } from 'lucide-react'; // Import the icons
 
 const Navbar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false); 
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
-    // Toggle the menu
-    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/home"); // Redirect to home page after logout
+    } catch (error) {
+      console.error("Logout failed:", error.message);
+    }
+  };
 
-    // Handle login and logout
-    const handleAuth = () => {
-        setLoggedIn(!loggedIn);
-    };
+  return (
+    <Box 
+      as="nav" 
+      bg="blue.500" 
+      color="white" 
+      py={4}
+      position="sticky" 
+      top="0" 
+      fontWeight="bold"
+      zIndex="999" // Ensures the navbar stays above other content
+    >
+      <Flex justify="space-between" align="center" maxW="1200px" mx="auto">
+        <Box>
+          <Text fontSize="2xl" fontWeight="bold">
+            Fitness Buddy
+          </Text>
+        </Box>
 
-    return (
-        <nav className="navbar">
-            <div className="navbar-container">
-                <div className="logo">
-                    <h2>Fitness Buddy</h2>
-                </div>  
-                <div className="hamburger" onClick={toggleMenu}>
-                    {isMenuOpen ? '✖' : '☰'} 
-                </div>
-                <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-                    <li>
-                        <NavLink
-                            to="/"
-                            className={({ isActive }) => (isActive ? 'active-link' : '')}
-                        >
-                            Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/about"
-                            className={({ isActive }) => (isActive ? 'active-link' : '')}
-                        >
-                            About
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to="/contact"
-                            className={({ isActive }) => (isActive ? 'active-link' : '')}
-                        >
-                            Contact
-                        </NavLink>
-                    </li>
-                    {/* Conditionally render Login or Logout */}
-                    {!loggedIn ? (
-                        <>
-                            <li>
-                                <NavLink
-                                    to="/login"
-                                    className={({ isActive }) => (isActive ? 'active-link' : '')}
-                                >
-                                    Login
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to="/register"
-                                    className={({ isActive }) => (isActive ? 'active-link' : '')}
-                                >
-                                    Register
-                                </NavLink>
-                            </li>
-                        </>
-                    ) : (
-                        <li>
-                            <button onClick={handleAuth} className="auth-button">
-                                Log Out
-                            </button>
-                        </li>
-                    )}
-                </ul>
-            </div>
-        </nav>
-    );
+        <Flex as="ul" listStyleType="none" spacing={4} align="center">
+          <Box as="li" mx={2}>
+            <NavLink to="/" activeclassname="active-link">
+              Home
+            </NavLink>
+          </Box>
+          <Box as="li" mx={2}>
+            <NavLink to="/dashboard" activeclassname="active-link">
+              Dashboard
+            </NavLink>
+          </Box>
+          <Box as="li" mx={2}>
+            <NavLink to="/" activeclassname="active-link">
+              Tips
+            </NavLink>
+          </Box>
+          <Box as="li" mx={2}>
+            <NavLink to="/about" activeclassname="active-link">
+              About us
+            </NavLink>
+          </Box>
+          <Box as="li" mx={2}>
+            <NavLink to="/contact" activeclassname="active-link">
+              Contact us
+            </NavLink>
+          </Box>
+          
+          {/* Display Login if user is not logged in */}
+          {!user ? (
+  <Box as="li" mx={2}>
+    <NavLink to="/authform" activeclassname="active-link">
+      <Button rightIcon={<LogIn />} colorScheme="teal" color="white">
+        Login
+      </Button>
+    </NavLink>
+  </Box>
+) : (
+  // Display Logout if the user is logged in
+  <Box as="li" mx={2}>
+    <Button rightIcon={<LogOut />} colorScheme="red" color="white" onClick={handleLogout}>
+      Logout
+    </Button>
+  </Box>
+)}
+
+        </Flex>
+      </Flex>
+    </Box>
+  );
 };
 
 export default Navbar;
