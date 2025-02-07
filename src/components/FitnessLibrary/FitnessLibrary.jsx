@@ -158,7 +158,7 @@ const DetailView = ({ article, onBack }) => {
                   <img
                     src={article.image}
                     alt={article.title}
-                    style={{ width: "100%", borderRadius: "8px" }}
+                    style={{ width: "50%",height:"100%", borderRadius: "8px" , display:"block", margin:"auto"}}
                   />
                 </Box>
               )}
