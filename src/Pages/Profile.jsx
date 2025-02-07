@@ -108,7 +108,7 @@ const Profile = () => {
 
 
   return (
-    <Container maxW="800px" py="4">
+    <Container maxW="800px" py="4" bg="white" mt="10" mb="10">
       <VStack spacing="3">
         <Heading size="lg" mb="2">Create Profile</Heading>
 
