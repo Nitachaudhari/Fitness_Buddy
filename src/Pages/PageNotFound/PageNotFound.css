@@ -1,0 +1,126 @@
+.page-not-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f7fafc;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.content {
+    text-align: center;
+    max-width: 100%;
+    width: 100%;
+    max-width: 600px;
+}
+
+.error-code {
+    font-size: 18vw;
+    font-weight: bold;
+    background: linear-gradient(to left, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.message {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.description {
+    margin-bottom: 30px;
+    color: #718096;
+    font-size: 1rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    /* Allow buttons to stack on smaller screens */
+}
+
+.home-link,
+.report-link {
+    display: inline-block;
+    padding: 12px 24px;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-bottom: 10px;
+    /* Add some spacing between buttons */
+}
+
+.home-link {
+    border: 2px solid #3182ce;
+    color: #3182ce;
+}
+
+.home-link:hover {
+    background-color: #3182ce;
+    color: white;
+}
+
+.report-link {
+    border: 2px solid #e53e3e;
+    color: #e53e3e;
+}
+
+.report-link:hover {
+    background-color: #e53e3e;
+    color: white;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 25vw;
+        /* Make error code size smaller on medium screens */
+    }
+
+    .message {
+        font-size: 1.5rem;
+        /* Adjust font size */
+    }
+
+    .description {
+        font-size: 0.9rem;
+        /* Adjust font size */
+    }
+
+    .home-link,
+    .report-link {
+        padding: 10px 20px;
+        /* Smaller padding for buttons */
+    }
+}
+
+@media (max-width: 480px) {
+    .error-code {
+        font-size: 30vw;
+        /* Make error code size smaller on small screens */
+    }
+
+    .message {
+        font-size: 1.2rem;
+        /* Adjust font size */
+    }
+
+    .description {
+        font-size: 0.85rem;
+        /* Adjust font size */
+    }
+
+    .home-link,
+    .report-link {
+        padding: 8px 16px;
+        /* Smaller padding for buttons */
+    }
+}

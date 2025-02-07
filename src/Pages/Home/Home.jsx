@@ -215,9 +215,8 @@ const Home = () => {
                     {images.map((_, index) => (
                       <button
                         key={index}
-                        className={`dot ${
-                          index === currentIndex ? "active" : ""
-                        }`}
+                        className={`dot ${index === currentIndex ? "active" : ""
+                          }`}
                         onClick={() => setCurrentIndex(index)}
                       />
                     ))}
