@@ -13,7 +13,9 @@ import WorkoutTracking from './Pages/Workout_Tracking/WorkoutTracking'
 import ProgressReport from './Pages/Progress_Report/ProgressReport'
 import ContactUs from './Pages/ContactUs/ContactUs'
 import FitnessLibrary from './Pages/FitnessLibrary/FitnessLibrary'
-import AboutUs from './Pages/AboutUs/AboutUs'
+import AboutUs from './Pages/AboutUs/About'
+import ProtectedRoutes from "./routes/ProtectedRoutes"
+import Chat from './components/Chat/Chat'
 const App = () => {
   return (
     <div>
@@ -21,17 +23,21 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<AboutUs/>} />
-        <Route path="/authform" element={<AuthForms/>} />
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/find-buddy" element={<BuddyFinder/>} />
-        <Route path="/edit-profile" element={<EditProfile/>}/>
-        <Route path="/workout-tracker" element={<WorkoutTracking/>}/>
-        <Route path="/progress-report" element={<ProgressReport/>}/>
-        {/* <Route path="/tips" element={<FitnessLibrary/>}/> */}
-        <Route path='/contact'element={<ContactUs/>}/>
-        <Route path="/tips" element={<FitnessLibrary/>}/>
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/authform" element={<AuthForms />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/find-buddy" element={<BuddyFinder />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
+        <Route path="/workout-tracker" element={<WorkoutTracking />} />
+        <Route path="/progress-report" element={<ProgressReport />} />
+        <Route path="/tips" element={<FitnessLibrary />} />
+        <Route path='/contact' element={<ContactUs />} />
+        <Route path="/tips" element={<FitnessLibrary />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/message/:buddyId" element={<Chat />} />
+        </Route>
+
         {/* <Route path='/contact'element={<ContactUs/>}/> */}
         {/* <Route path="*" element={<NotFount />} /> */}
       </Routes>
