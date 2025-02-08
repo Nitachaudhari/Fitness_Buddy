@@ -21,11 +21,12 @@ const Navbar = () => {
   return (
     <Box 
       as="nav" 
-      bg="teal.500" 
+      bg="blue.500" 
       color="white" 
       py={4}
       position="sticky" 
       top="0" 
+      fontWeight="bold"
       zIndex="999" // Ensures the navbar stays above other content
     >
       <Flex justify="space-between" align="center" maxW="1200px" mx="auto">
@@ -72,23 +73,25 @@ const Navbar = () => {
             </NavLink>
           </Box>
           
+          
           {/* Display Login if user is not logged in */}
           {!user ? (
-            <Box as="li" mx={2}>
-              <NavLink to="/authform" activeclassname="active-link">
-                <Button leftIcon={<LogIn />} colorScheme="teal">
-                  Login
-                </Button>
-              </NavLink>
-            </Box>
-          ) : (
-            // Display Logout if user is logged in
-            <Box as="li" mx={2}>
-              <Button leftIcon={<LogOut />} colorScheme="red" onClick={handleLogout}>
-                Logout
-              </Button>
-            </Box>
-          )}
+  <Box as="li" mx={2}>
+    <NavLink to="/authform" activeclassname="active-link">
+      <Button rightIcon={<LogIn />} colorScheme="teal" color="white">
+        Login
+      </Button>
+    </NavLink>
+  </Box>
+) : (
+  // Display Logout if the user is logged in
+  <Box as="li" mx={2}>
+    <Button rightIcon={<LogOut />} colorScheme="red" color="white" onClick={handleLogout}>
+      Logout
+    </Button>
+  </Box>
+)}
+
         </Flex>
       </Flex>
     </Box>
