@@ -16,12 +16,13 @@ allowing them to find workout partners, share progress, and stay motivated in a 
 ---
 
 ## 🛠️ Tech Stack
+![React](https://img.shields.io/badge/react-%23282C34.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) 
+![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![Chakra UI](https://img.shields.io/badge/chakra_ui-%2338B2AC.svg?style=for-the-badge&logo=chakra-ui&logoColor=white)
+![Git](https://img.shields.io/badge/git-%23F05032.svg?style=for-the-badge&logo=git&logoColor=white)
 
-**Frontend:** React (Vite) | Chakra UI | TypeScript | Redux Toolkit
-
-**Backend & Database:** Firebase Authentication | Firestore | Firebase Cloud Functions
-
-**Additional Tools:** Google Maps API | Lucide Icons
 
 ---
 
