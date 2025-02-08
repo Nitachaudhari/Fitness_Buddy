@@ -23,6 +23,7 @@ import {
   where, 
   Timestamp
 } from 'firebase/firestore';
+import ProgressReport from '../Progress_Report/ProgressReport';
 
 const WorkoutTracking = () => {
   const [workouts, setWorkouts] = useState([]);
@@ -32,6 +33,10 @@ const WorkoutTracking = () => {
     intensity: '',
     notes: ''
   });
+  const [totalCalories, setTotalCalories] = useState(0);
+  const [completedWorkouts, setCompletedWorkouts] = useState(0);
+  const [totalWorkoutTime, setTotalWorkoutTime] = useState(0);
+  
   const toast = useToast();
 
   const workoutTypes = [
@@ -42,6 +47,15 @@ const WorkoutTracking = () => {
     'Swimming',  
     'Other'
   ];
+
+  const calorieMap = {
+    Running: 10,      
+    Weightlifting: 5, 
+    Yoga: 3,         
+    Cycling: 8,     
+    Swimming: 7,    
+    Other: 4        
+  };
 
   useEffect(() => {
     if (!auth.currentUser) return;
@@ -58,9 +72,17 @@ const WorkoutTracking = () => {
         date: doc.data().timestamp?.toDate().toLocaleDateString() || new Date().toLocaleDateString()
       }));
 
-      // Sort workouts by timestamp client-side
       const sortedWorkouts = workoutList.sort((a, b) => b.timestamp - a.timestamp);
       setWorkouts(sortedWorkouts);
+      
+
+      const totalCalories = workoutList.reduce((total, workout) => total + (workout.calories || 0), 0);
+      const completedWorkouts = workoutList.filter(workout => parseInt(workout.duration) > 0).length;
+      const totalWorkoutTime = workoutList.reduce((total, workout) => total + (parseInt(workout.duration) || 0), 0);
+
+      setTotalCalories(totalCalories);
+      setCompletedWorkouts(completedWorkouts);
+      setTotalWorkoutTime(totalWorkoutTime);
     }, (error) => {
       console.error("Error fetching workouts:", error);
       toast({
@@ -90,8 +112,11 @@ const WorkoutTracking = () => {
     return null;
   };
 
+  const calculateCalories = (type, duration) => {
+    return calorieMap[type] * duration;
+  };
+
   const addWorkout = async () => {
-    // Check if user is authenticated
     if (!auth.currentUser) {
       console.error("No authenticated user found");
       toast({
@@ -118,17 +143,19 @@ const WorkoutTracking = () => {
     }
 
     try {
-      // Ensure all data is properly formatted
       const duration = parseInt(newWorkout.duration);
       if (isNaN(duration)) {
         throw new Error("Invalid duration value");
       }
+
+      const calories = calculateCalories(newWorkout.type, duration);
 
       const workoutData = {
         type: newWorkout.type.trim(),
         duration: duration,
         intensity: newWorkout.intensity.trim(),
         notes: newWorkout.notes?.trim() || "",
+        calories: calories,
         userId: auth.currentUser.uid,
         timestamp: Timestamp.now(),
         createdAt: new Date().toISOString()
@@ -138,7 +165,7 @@ const WorkoutTracking = () => {
 
       const docRef = await addDoc(collection(db, 'workouts'), workoutData);
       console.log("Document written with ID:", docRef.id);
-      
+
       toast({
         title: "Workout logged successfully",
         status: "success",
@@ -154,7 +181,6 @@ const WorkoutTracking = () => {
       });
     } catch (error) {
       console.error("Error adding workout:", error);
-      // More detailed error message
       toast({
         title: "Error logging workout",
         description: error.message || "Please try again",
@@ -165,16 +191,10 @@ const WorkoutTracking = () => {
     }
   };
 
-  const calculateTotalWorkoutTime = () => {
-    return workouts.reduce((total, workout) => 
-      total + (parseInt(workout.duration) || 0), 0
-    );
-  };
-
   return (
-    <Card maxW="2xl" mx="auto" padding='10px'>
+    <Card maxW="3xl" mx="auto" padding='10px'>
       <CardHeader bg='rgb(82, 187, 236)' borderRadius='5px' marginBottom='10px'>
-        <Heading color='white' size="md">Workout Tracker</Heading>
+        <Heading color='white' size="md" textAlign='center'>Workout Tracker</Heading>
       </CardHeader>
       
       <CardBody>
@@ -250,7 +270,11 @@ const WorkoutTracking = () => {
                       <Text fontWeight="medium">{workout.type}</Text>
                       <Text fontSize="sm" color="gray.600">
                         {workout.date} • {workout.duration} mins • {workout.intensity}
-                        {workout.notes && ` • Notes: ${workout.notes}`}
+                        {workout.notes && ` • Notes: ${workout.notes}`} 
+                        <br />
+                        <Text fontSize="xs" color="green.500">
+                          Calories Burned: {workout.calories} kcal
+                        </Text>
                       </Text>
                     </Box>
                   </Flex>
@@ -263,9 +287,22 @@ const WorkoutTracking = () => {
 
       <CardFooter>
         <Text width="full" textAlign="center" fontSize="md" color="black.600" fontWeight='bold'>
-          Total Workout Time: {calculateTotalWorkoutTime()} minutes
+          Total Workout Time: {totalWorkoutTime} minutes
         </Text>
+        <Text width="full" textAlign="center" fontSize="md" color="black.600">
+          Completed Workouts: {completedWorkouts}
+        </Text>
+        <Text width="full" textAlign="center" fontSize="md" color="black.600">
+          Total Calories Burned: {totalCalories} kcal
+        </Text>
+        
       </CardFooter>
+      <br/>
+      <ProgressReport
+           totalCalories={totalCalories} 
+           completedWorkouts={completedWorkouts} 
+           totalWorkoutTime={totalWorkoutTime} 
+        />
     </Card>
   );
 };

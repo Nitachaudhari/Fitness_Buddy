@@ -15,35 +15,48 @@ import {
   Container,
   Stack,
   Button,
-  useToast
+  useToast,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatHelpText,
+  Divider
 } from "@chakra-ui/react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { Trophy, Dumbbell, Flame, Download } from 'lucide-react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { Trophy, Dumbbell, Flame, Download, TrendingUp, Calendar } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-const ProgressReport = () => {
+const ProgressReport = ({ totalCalories, completedWorkouts, totalWorkoutTime }) => {
   const reportRef = useRef(null);
   const toast = useToast();
 
-  const workoutData = {
-    completedWorkouts: 4,
-    plannedWorkouts: 5,
-    caloriesBurned: 1200,
-    weeklyGoal: 1500,
-    dailyWorkouts: [
-      { day: 'Mon', duration: 45, calories: 300 },
-      { day: 'Tue', duration: 30, calories: 250 },
-      { day: 'Wed', duration: 0, calories: 0 },
-      { day: 'Thu', duration: 60, calories: 400 },
-      { day: 'Fri', duration: 35, calories: 250 },
-      { day: 'Sat', duration: 0, calories: 0 },
-      { day: 'Sun', duration: 0, calories: 0 },
-    ]
+  const getLast7Days = () => {
+    const dates = [];
+    const today = new Date();
+    
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      const formattedDate = date.toLocaleDateString('en-GB'); 
+      dates.push(formattedDate);
+    }
+    
+    return dates;
   };
 
-  const workoutCompletion = (workoutData.completedWorkouts / workoutData.plannedWorkouts) * 100;
-  const calorieProgress = (workoutData.caloriesBurned / workoutData.weeklyGoal) * 100;
+  const workoutData = {
+    completedWorkouts: completedWorkouts,
+    plannedWorkouts: totalWorkoutTime,
+    caloriesBurned: totalCalories,
+    weeklyGoal: 1500,
+    dailyWorkouts: getLast7Days().map((date, index) => ({
+      day: date,
+      duration: Math.floor(Math.random() * (60 - 30 + 1)) + 30,
+      calories: [300, 250, 130, 400, 250, 0, 0][index],
+      intensity: ['High', 'Medium', 'Low', 'High', 'Medium', 'Rest', 'Rest'][index],
+    }))
+  };
 
   const generatePDF = async () => {
     try {
@@ -83,10 +96,19 @@ const ProgressReport = () => {
     }
   };
 
+  const avgDuration = workoutData.dailyWorkouts
+    .reduce((acc, curr) => acc + curr.duration, 0) / workoutData.dailyWorkouts.filter(d => d.duration > 0).length;
+  
+  const avgCalories = workoutData.dailyWorkouts
+    .reduce((acc, curr) => acc + curr.calories, 0) / workoutData.dailyWorkouts.filter(d => d.calories > 0).length;
+
   return (
     <Container maxW="container.xl" py={4}>
       <Flex justify="space-between" align="center" mb={6}>
-        <Heading size="lg" color='black'>Weekly Progress Report</Heading>
+        <Box>
+          <Heading size="lg" color='black'>Weekly Progress Report</Heading>
+          <Text color="gray.600">Week of {new Date().toLocaleDateString()}</Text>
+        </Box>
         <Button
           leftIcon={<Download size={16} />}
           colorScheme="blue"
@@ -100,78 +122,113 @@ const ProgressReport = () => {
         <Stack spacing={6}>
           <Grid templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap={4}>
             <Card>
-               
               <CardHeader>
                 <Flex justify="space-between" align="center">
-                  <Heading size="md" color='black'>Workout Completion</Heading>
+                  <Heading size="md" color='black'>Workout Stats</Heading>
                   <Box color="blue.500">
                     <Dumbbell size={16} />
                   </Box>
                 </Flex>
               </CardHeader>
               <CardBody>
-                <Heading size="lg" color='black'>{workoutData.completedWorkouts}/{workoutData.plannedWorkouts}</Heading>
-                <Progress value={workoutCompletion} mt={2} colorScheme="blue" />
+                <Stat>
+                  <StatLabel>Total Time</StatLabel>
+                  <StatNumber>{totalWorkoutTime} mins</StatNumber>
+                  <StatHelpText>Avg {avgDuration.toFixed(1)} mins per session</StatHelpText>
+                </Stat>
               </CardBody>
             </Card>
 
             <Card>
               <CardHeader>
                 <Flex justify="space-between" align="center">
-                  <Heading size="md" color='black'>Calories Burned</Heading>
+                  <Heading size="md" color='black'>Energy Burned</Heading>
                   <Box color="orange.500">
                     <Flame size={16} />
                   </Box>
                 </Flex>
               </CardHeader>
               <CardBody>
-                <Heading size="lg" color='black'>{workoutData.caloriesBurned}</Heading>
-                <Progress value={calorieProgress} mt={2} colorScheme="orange" />
+                <Stat>
+                  <StatLabel>Total Calories</StatLabel>
+                  <StatNumber>{totalCalories} kcal</StatNumber>
+                  <StatHelpText>Avg {avgCalories.toFixed(0)} kcal per workout</StatHelpText>
+                </Stat>
               </CardBody>
             </Card>
 
-            <Card >
+            <Card>
               <CardHeader>
-                <Flex justify="space-between"  align="center">
-                  <Heading size="md" color='black'>Weekly Goal Progress</Heading>
+                <Flex justify="space-between" align="center">
+                  <Heading size="md" color='black'>Activity Overview</Heading>
                   <Box color="yellow.500">
-                    <Trophy size={16} />
+                    <Calendar size={16} />
                   </Box>
                 </Flex>
               </CardHeader>
               <CardBody>
-                <Heading size="lg" color='black'>{Math.round(calorieProgress)}%</Heading>
-                <Text fontSize="xs" color="gray.500">Target: {workoutData.weeklyGoal} calories</Text>
+                <Stat>
+                  <StatLabel>Workouts Completed</StatLabel>
+                  <StatNumber>{completedWorkouts}</StatNumber>
+                  
+                </Stat>
               </CardBody>
             </Card>
           </Grid>
 
           <Card>
             <CardHeader>
-              <Heading size="lg" color='black'>Weekly Activity</Heading>
+              <Flex justify="space-between" align="center">
+                <Heading size="lg" color='black'>Weekly Activity</Heading>
+                <Box>
+                  <Text color="gray.600">Daily Progress Tracking</Text>
+                </Box>
+              </Flex>
             </CardHeader>
             <CardBody>
               <Box height="300px">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={workoutData.dailyWorkouts}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="day" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
+                    <XAxis dataKey="day" tickFormatter={(tick) =>  {
+                        const [day, month, year] = tick.split('/');
+                        return `${day}/${month}`;
+                      }} />
                     <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
                     <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
-                    <Tooltip />
+                    <Tooltip 
+                      content={({ active, payload, label }) => {
+                        if (active && payload && payload.length) {
+                          return (
+                            <Box bg="white" p={3} shadow="md" borderRadius="md">
+                              <Text fontWeight="bold">{label}</Text>
+                              <Text>Duration: {workoutData.dailyWorkouts.find(d => d.day === label).duration} mins</Text>
+                              <Text>Calories: {workoutData.dailyWorkouts.find(d => d.day === label).calories}</Text>
+                              <Text>Intensity: {workoutData.dailyWorkouts.find(d => d.day === label).intensity}</Text>
+                            </Box>
+                          );
+                        }
+                        return null;
+                      }}
+                    />
+                    <Legend />
                     <Line
                       yAxisId="left"
                       type="monotone"
                       dataKey="duration"
                       stroke="#8884d8"
+                      strokeWidth={2}
                       name="Duration (min)"
+                      dot={{ strokeWidth: 2 }}
                     />
                     <Line
                       yAxisId="right"
                       type="monotone"
                       dataKey="calories"
                       stroke="#82ca9d"
+                      strokeWidth={2}
                       name="Calories"
+                      dot={{ strokeWidth: 2 }}
                     />
                   </LineChart>
                 </ResponsiveContainer>
@@ -181,38 +238,49 @@ const ProgressReport = () => {
 
           <Card>
             <CardHeader>
-              <Heading size="md">Weekly Insights</Heading>
+              <Heading size="md" color='black'>Weekly Insights</Heading>
             </CardHeader>
             <CardBody>
-              <List spacing={3}>
+              <List spacing={4}>
                 <ListItem>
-                  <Flex align="center" gap={2}>
+                  <Flex align="center" gap={3}>
                     <Circle size="40px" bg="green.100">
                       <Box color="green.600">
                         <Trophy size={16} />
                       </Box>
                     </Circle>
-                    <Text>Completed {workoutData.completedWorkouts} workouts this week</Text>
+                    <Box>
+                      <Text fontWeight="medium">Achievement</Text>
+                      <Text color="gray.600">Completed {workoutData.completedWorkouts} workouts</Text>
+                    </Box>
                   </Flex>
                 </ListItem>
+                <Divider />
                 <ListItem>
-                  <Flex align="center" gap={2}>
+                  <Flex align="center" gap={3}>
                     <Circle size="40px" bg="orange.100">
                       <Box color="orange.600">
                         <Flame size={16} />
                       </Box>
                     </Circle>
-                    <Text>Burned {workoutData.caloriesBurned} calories</Text>
+                    <Box>
+                      <Text fontWeight="medium">Calorie Goal</Text>
+                      <Text color="gray.600">Burned {workoutData.caloriesBurned} kcal</Text>
+                    </Box>
                   </Flex>
                 </ListItem>
+                <Divider />
                 <ListItem>
-                  <Flex align="center" gap={2}>
+                  <Flex align="center" gap={3}>
                     <Circle size="40px" bg="blue.100">
                       <Box color="blue.600">
-                        <Dumbbell size={16} />
+                        <TrendingUp size={16} />
                       </Box>
                     </Circle>
-                    <Text>Most active day: Thursday (60 minutes)</Text>
+                    <Box>
+                      <Text fontWeight="medium">Progress Analysis</Text>
+                      <Text color="gray.600">Average workout duration: {avgDuration.toFixed(1)} minutes</Text>
+                    </Box>
                   </Flex>
                 </ListItem>
               </List>

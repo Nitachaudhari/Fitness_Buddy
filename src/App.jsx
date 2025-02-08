@@ -10,7 +10,7 @@ import EditProfile from './Pages/EditProfile'
 import BuddyFinder from './components/BuddyMatching/BuddyFinder'
 import { Routes, Route } from "react-router-dom";
 import WorkoutTracking from './Component/Workout_Tracking/WorkoutTracking'
-import ProgressReport from './Component/Progress_Report/ProgressReport'
+
 
 // import FitnessLibrary from './components/FitnessLibrary/FitnessLibrary'
 import ContactUs from './Pages/ContactUs/ContactUs'
