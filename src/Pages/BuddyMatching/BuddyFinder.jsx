@@ -13,7 +13,7 @@ const BuddyFinder = () => {
   const [loading, setLoading] = useState(true);
   const toast = useToast();
   const navigate = useNavigate();
-  
+
   const [filters, setFilters] = useState({
     goalType: "",
     activityLevel: "",
@@ -42,10 +42,10 @@ const BuddyFinder = () => {
     try {
       setLoading(true);
       const usersRef = collection(db, "users");
-      
+
       // Create base query
       let baseQuery = query(usersRef);
-      
+
       // Add filters
       if (filters.goalType) {
         baseQuery = query(baseQuery, where("goalType", "==", filters.goalType));
@@ -53,10 +53,10 @@ const BuddyFinder = () => {
       if (filters.activityLevel) {
         baseQuery = query(baseQuery, where("activityLevel", "==", filters.activityLevel));
       }
-      
+
       const querySnapshot = await getDocs(baseQuery);
       const buddies = [];
-      
+
       querySnapshot.forEach((doc) => {
         const buddyData = doc.data();
         // Filter out the current user and apply additional filters
@@ -67,7 +67,7 @@ const BuddyFinder = () => {
           });
         }
       });
-      
+
       setPotentialBuddies(buddies);
     } catch (error) {
       console.error("Error fetching buddies:", error);
@@ -92,31 +92,31 @@ const BuddyFinder = () => {
   const calculateCompatibility = (buddy) => {
     let score = 0;
     let factors = 0;
-    
+
     // Goal Type Match
     if (buddy.goalType === filters.goalType) {
       score += 30;
       factors++;
     }
-    
+
     // Activity Level Match
     if (buddy.activityLevel === filters.activityLevel) {
       score += 25;
       factors++;
     }
-    
+
     // Weekly Goal Match
     if (buddy.weeklyGoal === filters.weeklyGoal) {
       score += 20;
       factors++;
     }
-    
+
     // Workout Frequency Match
     if (buddy.workoutFrequency === filters.workoutFrequency) {
       score += 25;
       factors++;
     }
-    
+
     return factors > 0 ? Math.round((score / (factors * 100)) * 100) : 0;
   };
 
@@ -138,7 +138,7 @@ const BuddyFinder = () => {
                 <Select
                   size="sm"
                   value={filters.goalType}
-                  onChange={(e) => setFilters({...filters, goalType: e.target.value})}
+                  onChange={(e) => setFilters({ ...filters, goalType: e.target.value })}
                 >
                   <option value="">Any Goal</option>
                   <option value="lose-weight">Lose Weight</option>
@@ -153,7 +153,7 @@ const BuddyFinder = () => {
                 <Select
                   size="sm"
                   value={filters.activityLevel}
-                  onChange={(e) => setFilters({...filters, activityLevel: e.target.value})}
+                  onChange={(e) => setFilters({ ...filters, activityLevel: e.target.value })}
                 >
                   <option value="">Any Level</option>
                   <option value="sedentary">Sedentary</option>
@@ -169,7 +169,7 @@ const BuddyFinder = () => {
                 <Select
                   size="sm"
                   value={filters.weeklyGoal}
-                  onChange={(e) => setFilters({...filters, weeklyGoal: e.target.value})}
+                  onChange={(e) => setFilters({ ...filters, weeklyGoal: e.target.value })}
                 >
                   <option value="">Any Goal</option>
                   <option value="0.25">0.25 kg/week</option>
@@ -183,7 +183,7 @@ const BuddyFinder = () => {
                 <Text fontSize="sm" mb="2">Distance Range: {filters.maxDistance}km</Text>
                 <Slider
                   value={filters.maxDistance}
-                  onChange={(v) => setFilters({...filters, maxDistance: v})}
+                  onChange={(v) => setFilters({ ...filters, maxDistance: v })}
                   min={1}
                   max={50}
                 >
@@ -235,7 +235,7 @@ const BuddyFinder = () => {
                         size="sm"
                         colorScheme="blue"
                         leftIcon={<Users size={16} />}
-                        onClick={() => navigate(`/message/${buddy.id}`)} // Navigate to messaging page
+                        onClick={() => buddy?.id && navigate(`/message/${buddy.id}`)}
                       >
                         Send Message
                       </Button>
