@@ -38,14 +38,16 @@ allowing them to find workout partners, share progress, and stay motivated in a 
 ```
 FitnessBuddy_App/
 │── src/
+|   ├── Assets
 │   ├── components/   # Reusable UI components
-│   ├── pages/        # App pages (Dashboard, BuddyFinder, etc.)
-│   ├── hooks/        # Custom React hooks
+│   ├── Pages/        # App pages (Dashboard, BuddyFinder, etc.)
 │   ├── context/      # Global state management
-│   ├── firebase/     # Firebase config & API functions
+│   ├── data/         # dataset for library
+│   ├── services/     # Firebase config & API functions
 │   ├── assets/       # Images & icons
 │   ├── App.jsx       # Main app component
 │   ├── main.jsx      # Entry point
+│   ├── theme.js      # Theme page
 │── public/           # Static assets
 │── package.json      # Dependencies & scripts
 │── README.md         # Project documentation
@@ -54,8 +56,11 @@ FitnessBuddy_App/
 ---
 
 ## 📢 Connect with Us
-[![Nita Chaudhari](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/nita-chaudhari-a94038128/)
-- Nita Chaudhari [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](www.linkedin.com/in/deepro-chakraborty-0b0530282) 
+- Nita Chaudhury  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nita-chaudhari-a94038128/) 
+- Arpit Patel  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)]() 
+- Tharun unnikrishnan  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)]() 
+-Omkar patane  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)]() 
+
 
 ---
 
@@ -63,13 +68,22 @@ FitnessBuddy_App/
 
 1️⃣ **Clone the repo:**  
 ```bash
-git clone https://github.com/yourusername/FitnessBuddy_App.git
+git clone https://github.com/Nitachaudhari/Fitness_Buddy.git
 cd FitnessBuddy_App
 ```
 
 2️⃣ **Install dependencies:**  
 ```bash
 npm install
+npm i @chakra-ui/react@2 @emotion/react @emotion/styled framer-motion
+npm i firebase
+npm i react-icons
+npm i lucide-react
+npm install react-router-dom
+npm install recharts
+npm install html2canvas
+npm install jspdf
+
 ```
 
 3️⃣ **Set up Firebase:**  
@@ -82,7 +96,6 @@ npm run dev
 ```
 
 🎉 **Enjoy your fitness journey with FitnessBuddy!** 💪
-
 
 
 ## Collaborators Clone & Work on the Project
