@@ -9,6 +9,8 @@ import AuthForms from './components/AuthForm'
 import EditProfile from './Pages/EditProfile'
 import BuddyFinder from './components/BuddyMatching/BuddyFinder'
 import { Routes, Route } from "react-router-dom";
+// import FitnessLibrary from './components/FitnessLibrary/FitnessLibrary'
+import ContactUs from './Pages/ContactUs/ContactUs'
 import FitnessLibrary from './components/FitnessLibrary/FitnessLibrary'
 
 
@@ -26,6 +28,8 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/find-buddy" element={<BuddyFinder/>} />
         <Route path="/edit-profile" element={<EditProfile/>}/>
+        {/* <Route path="/tips" element={<FitnessLibrary/>}/> */}
+        <Route path='/contact'element={<ContactUs/>}/>
         <Route path="/tips" element={<FitnessLibrary/>}/>
         {/* <Route path='/contact'element={<ContactUs/>}/> */}
         {/* <Route path="*" element={<NotFount />} /> */}
