@@ -1,6 +1,7 @@
 # FitnessBuddy_App 🏋️‍♂️
 
-**A community-driven fitness app to find workout buddies, track workouts, and stay motivated!**
+**A community-driven fitness app to find workout buddies, track workouts, and stay motivated! This app connects users with similar fitness goals, 
+allowing them to find workout partners, share progress, and stay motivated in a supportive fitness community.**
 
 ---
 
