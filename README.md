@@ -53,8 +53,9 @@ FitnessBuddy_App/
 
 ---
 
-## 📢 Connect with Me
+## 📢 Connect with Us
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/your-handle/)
+- Nita Chaudhari [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](www.linkedin.com/in/deepro-chakraborty-0b0530282) 
 
 ---
 
