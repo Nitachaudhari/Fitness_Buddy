@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
-import { db } from "../services/firebase";
+import { useAuth } from "../../context/AuthContext";
+import { db } from "../../services/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, FormControl, FormLabel, Input, VStack, Heading } from "@chakra-ui/react";

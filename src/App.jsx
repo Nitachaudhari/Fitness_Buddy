@@ -1,21 +1,19 @@
 import React from 'react'
 import "./App.css"
-import Home from "./Pages/Home/Home"
-import Footer from './Pages/Footer/Footer'
+import Home from "./components/Home/Home"
+import Footer from './components/Footer/Footer'
 import Navbar from './components/Navbar/Navbar'
-import Profile from './Pages/Profile'
-import Dashboard from './Pages/Dashboard'
+import Dashboard from './Pages/Dashboard/Dashboard'
+import Profile from './Pages/Profile/Profile'
 import AuthForms from './components/AuthForm'
-import EditProfile from './Pages/EditProfile'
-import BuddyFinder from './components/BuddyMatching/BuddyFinder'
+import EditProfile from './Pages/Profile/EditProfile'
+import BuddyFinder from './Pages/BuddyMatching/BuddyFinder'
 import { Routes, Route } from "react-router-dom";
-import WorkoutTracking from './Component/Workout_Tracking/WorkoutTracking'
-
-
-// import FitnessLibrary from './components/FitnessLibrary/FitnessLibrary'
+import WorkoutTracking from './Pages/Workout_Tracking/WorkoutTracking'
+import ProgressReport from './Pages/Progress_Report/ProgressReport'
 import ContactUs from './Pages/ContactUs/ContactUs'
-import FitnessLibrary from './components/FitnessLibrary/FitnessLibrary'
-
+import FitnessLibrary from './Pages/FitnessLibrary/FitnessLibrary'
+import AboutUs from './Pages/AboutUs/AboutUs'
 const App = () => {
   return (
     <div>
@@ -23,9 +21,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-
+        <Route path="/about" element={<AboutUs/>} />
         <Route path="/authform" element={<AuthForms/>} />
-
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/find-buddy" element={<BuddyFinder/>} />

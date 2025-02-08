@@ -1,8 +1,10 @@
 import React from "react";
 import { Box, Container, Stack, Text, Link, Icon, HStack, Divider } from "@chakra-ui/react";
-import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa"; 
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"; 
 
 const Footer = () => {
+    const navigate = useNavigate()
     return (
         <Box as="footer" bg="blue.500" color="white" py={{ base: 8, md: 12 }}>
             <Container maxW="container.xl">
@@ -13,18 +15,14 @@ const Footer = () => {
                             Fitness Buddy
                         </Text>
                         <Stack spacing={4} mt={6}>
-                            <Link href="#" fontSize="lg" _hover={{ textDecoration: "underline", color: "teal.300" }}>
-                                About Us
-                            </Link>
-                            <Link href="#" fontSize="lg" _hover={{ textDecoration: "underline", color: "teal.300" }}>
-                                Contact Us
-                            </Link>
-                            <Link href="#" fontSize="lg" _hover={{ textDecoration: "underline", color: "teal.300" }}>
-                                Privacy Policy
-                            </Link>
-                            <Link href="#" fontSize="lg" _hover={{ textDecoration: "underline", color: "teal.300" }}>
-                                Terms of Use
-                            </Link>
+                            <Text fontSize="lg" color="white" _hover={{ textDecoration: "underline", color: "teal.300" }}
+                            onClick={() => navigate('/about')} >About us</Text>
+                            <Text fontSize="lg" color="white" _hover={{ textDecoration: "underline", color: "teal.300" }}
+                            onClick={() => navigate('/contact')} >Contact us</Text>
+                            <Text fontSize="lg" color="white" _hover={{ textDecoration: "underline", color: "teal.300" }}
+                            onClick={() => navigate('/about')} >Privacy Policy</Text>
+                            <Text fontSize="lg" color="white" _hover={{ textDecoration: "underline", color: "teal.300" }}
+                            onClick={() => navigate('/about')} >Terms of Use</Text>
                         </Stack>
                     </Box>
 

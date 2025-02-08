@@ -54,11 +54,11 @@ const Navbar = () => {
           </Box>
           
           <Box as="li" mx={2}>
-            <NavLink to="/" activeclassname="active-link">
+            <NavLink to="/tips" activeclassname="active-link">
               Tips
             </NavLink>
           </Box>
-          <Box as="li" mx={2}>
+          {/* <Box as="li" mx={2}>
             <NavLink to="/about" activeclassname="active-link">
               About us
             </NavLink>
@@ -67,7 +67,7 @@ const Navbar = () => {
             <NavLink to="/contact" activeclassname="active-link">
               Contact us
             </NavLink>
-          </Box>
+          </Box> */}
           
           
           {/* Display Login if user is not logged in */}

@@ -14,7 +14,8 @@ import {
   Flex,
   useToast
 } from '@chakra-ui/react';
-import { db, auth } from '../../firebase/config';
+import { db,auth } from '../../services/firebase';
+// import { db, auth } from '../../firebase/config';
 import { 
   collection, 
   addDoc, 
@@ -23,7 +24,7 @@ import {
   where, 
   Timestamp
 } from 'firebase/firestore';
-import ProgressReport from '../Progress_Report/ProgressReport';
+import ProgressReport from '../../Pages/Progress_Report/ProgressReport';
 
 const WorkoutTracking = () => {
   const [workouts, setWorkouts] = useState([]);
