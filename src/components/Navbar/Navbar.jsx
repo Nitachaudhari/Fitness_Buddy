@@ -51,11 +51,7 @@ const Navbar = () => {
               Workout Tracker
             </NavLink>
           </Box>
-          <Box as="li" mx={2}>
-            <NavLink to="/progress-report" activeclassname="active-link">
-              Progress Tracker
-            </NavLink>
-          </Box>
+          
           <Box as="li" mx={2}>
             <NavLink to="/" activeclassname="active-link">
               Tips

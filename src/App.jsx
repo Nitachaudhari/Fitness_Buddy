@@ -10,7 +10,7 @@ import EditProfile from './Pages/EditProfile'
 import BuddyFinder from './components/BuddyMatching/BuddyFinder'
 import { Routes, Route } from "react-router-dom";
 import WorkoutTracking from './Component/Workout_Tracking/WorkoutTracking'
-import ProgressReport from './Component/Progress_Report/ProgressReport'
+
 
 const App = () => {
   return (
@@ -27,7 +27,7 @@ const App = () => {
         <Route path="/find-buddy" element={<BuddyFinder/>} />
         <Route path="/edit-profile" element={<EditProfile/>}/>
         <Route path="/workout-tracker" element={<WorkoutTracking/>}/>
-        <Route path="/progress-report" element={<ProgressReport/>}/>
+        
         {/* <Route path="*" element={<NotFount />} /> */}
       </Routes>
       <Footer />
