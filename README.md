@@ -17,3 +17,6 @@ npm i lucide-react
 
 npm install react-router-dom
 
+npm install recharts
+npm install html2canvas
+npm install jspdf

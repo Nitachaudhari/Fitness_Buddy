@@ -48,6 +48,12 @@ const Navbar = () => {
             </NavLink>
           </Box>
           <Box as="li" mx={2}>
+            <NavLink to="/workout-tracker" activeclassname="active-link">
+              Workout Tracker
+            </NavLink>
+          </Box>
+          
+          <Box as="li" mx={2}>
             <NavLink to="/" activeclassname="active-link">
               Tips
             </NavLink>
@@ -62,6 +68,7 @@ const Navbar = () => {
               Contact us
             </NavLink>
           </Box>
+          
           
           {/* Display Login if user is not logged in */}
           {!user ? (
