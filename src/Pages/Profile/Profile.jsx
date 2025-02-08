@@ -15,6 +15,9 @@ import { Activity, Weight, Target, Calendar } from "lucide-react";
 const Profile = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const textColor = useColorModeValue("gray.800", "white");
+  const bgColor = useColorModeValue("white", "gray.800");
+
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -33,7 +36,7 @@ const Profile = () => {
       thighs: "",
     },
     targetDate: "",
-    city:"",
+    city: "",
     location: { lat: "", lng: "" },
   });
 
@@ -108,13 +111,13 @@ const Profile = () => {
 
 
   return (
-    <Container maxW="800px" py="4" bg="white" mt="10" mb="10">
+    <Container maxW="800px" py="4" bg={bgColor} mt="10" mb="10">
       <VStack spacing="3">
-        <Heading size="lg" mb="2">Create Profile</Heading>
+        <Heading size="lg" mb="2" color={textColor}>Create Profile</Heading>
 
         <Card w="full" variant="outline" size="sm">
           <CardHeader pb="2">
-            <Heading size="sm">Personal Information</Heading>
+            <Heading size="sm" color={textColor}>Personal Information</Heading>
           </CardHeader>
           <CardBody pt="0">
             <Stack spacing="2">
@@ -132,7 +135,7 @@ const Profile = () => {
 
         <Card w="full" variant="outline" size="sm">
           <CardHeader pb="2">
-            <Heading size="sm">Fitness Goals</Heading>
+            <Heading size="sm" color={textColor}>Fitness Goals</Heading>
           </CardHeader>
           <CardBody pt="0">
             <VStack spacing="2" align="stretch">
@@ -195,7 +198,7 @@ const Profile = () => {
 
         <Card w="full" variant="outline" size="sm">
           <CardHeader pb="2">
-            <Heading size="sm">Body Measurements</Heading>
+            <Heading size="sm" color={textColor}>Body Measurements</Heading>
           </CardHeader>
           <CardBody pt="0">
             <SimpleGrid columns={2} spacing="2">
@@ -218,7 +221,7 @@ const Profile = () => {
 
         <Card w="full" variant="outline" size="sm">
           <CardHeader pb="2">
-            <Heading size="sm">Specific Goals</Heading>
+            <Heading size="sm" color={textColor}>Specific Goals</Heading>
           </CardHeader>
           <CardBody pt="0">
             <SimpleGrid columns={2} spacing="2">
@@ -242,42 +245,43 @@ const Profile = () => {
           <Input size="sm" type="date" name="targetDate" value={formData.targetDate} onChange={handleChange} />
         </FormControl>
         <Card w="full" variant="outline" size="sm">
-  <CardHeader pb="2">
-    <Heading size="sm">Location</Heading>
-  </CardHeader>
-  <CardBody pt="0">
-    <VStack spacing="2" align="stretch">
-      {/* Manual city input */}
-      <FormControl>
-        <FormLabel fontSize="sm">City</FormLabel>
-        <Input
-          size="sm"
-          name="city"
-          value={formData.city}
-          onChange={handleChange}
-          placeholder="Enter your city"
-        />
-      </FormControl>
-      {/* Button to get current location */}
-      <FormControl>
-        <FormLabel fontSize="sm">Current Location</FormLabel>
-        <Button onClick={getLocation} colorScheme="teal" size="sm">
-          Get My Location
-        </Button>
-        {formData.location.lat && formData.location.lng && (
-          <Text fontSize="sm" mt="2">
-            Latitude: {formData.location.lat}, Longitude: {formData.location.lng}
-          </Text>
-        )}
-      </FormControl>
+          <CardHeader pb="2">
+            <Heading size="sm" color={textColor}>Location</Heading>
+          </CardHeader>
+          <CardBody pt="0">
+            <VStack spacing="2" align="stretch">
+              {/* Manual city input */}
+              <FormControl>
+                <FormLabel fontSize="sm">City</FormLabel>
+                <Input
+                  size="sm"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  placeholder="Enter your city"
+                />
+              </FormControl>
+              {/* Button to get current location */}
+              <FormControl>
+                <FormLabel fontSize="sm">Current Location</FormLabel>
+                <Button onClick={getLocation} colorScheme="teal" size="sm">
+                  Get My Location
+                </Button>
+                {formData.location.lat && formData.location.lng && (
+                  <Text fontSize="sm" mt="2">
+                    Latitude: {formData.location.lat}, Longitude: {formData.location.lng}
+                  </Text>
+                )}
+              </FormControl>
 
-      
-    </VStack>
-  </CardBody>
-</Card>
+
+            </VStack>
+          </CardBody>
+        </Card>
 
         <Button
           colorScheme="blue"
+          color={textColor}
           size="md"
           width="full"
           onClick={handleProfileSave}

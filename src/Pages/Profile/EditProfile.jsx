@@ -3,8 +3,9 @@ import { useAuth } from "../../context/AuthContext";
 import { db } from "../../services/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, FormControl, FormLabel, Input, VStack, Heading } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
+
 const EditProfile = () => {
   const { user } = useAuth();
   const [profile, setProfile] = useState({
@@ -25,6 +26,11 @@ const EditProfile = () => {
   });
 
   const navigate = useNavigate();
+  const { colorMode } = useColorMode();
+
+  // Light mode and dark mode values
+  const bgColor = useColorModeValue("white", "gray.800");
+  const textColor = useColorModeValue("gray.800", "white");
 
   useEffect(() => {
     if (!user) return;
@@ -81,9 +87,19 @@ const EditProfile = () => {
   };
 
   return (
-    <Box maxW="500px" mx="auto" mt="10" mb="10" p="5" borderWidth="1px" borderRadius="lg" bg="white">
+    <Box
+      maxW="500px"
+      mx="auto"
+      mt="10"
+      mb="10"
+      p="5"
+      borderWidth="1px"
+      borderRadius="lg"
+      bg={bgColor}
+      color={textColor}
+    >
       <VStack spacing="3">
-        <Heading mb="2">Edit Profile</Heading>
+        <Heading mb="2" color={textColor}>Edit Profile</Heading>
 
         <FormControl>
           <FormLabel>Name</FormLabel>
@@ -121,7 +137,7 @@ const EditProfile = () => {
         </FormControl>
 
         {/* Body Measurements Section */}
-        <Heading size="md" mb="1">Body Measurements (inch)</Heading>
+        <Heading size="md" mb="1" color={textColor}>Body Measurements (inch)</Heading>
 
         <FormControl>
           <FormLabel>Chest</FormLabel>

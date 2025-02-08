@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { useAuth } from "../../context/AuthContext";
-// import { db } from "../services/firebase";
 import { db } from "../../services/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -15,19 +14,17 @@ const Dashboard = () => {
   const { user } = useAuth();
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
+
+  // Define background and border colors based on the color mode
   const bgColor = useColorModeValue("white", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.700");
+  const textColor = useColorModeValue("gray.800", "white");
 
   useEffect(() => {
-    // if (!user) {
-    //   return;
-    // }
-
     const fetchProfile = async () => {
       try {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
-        // console.log("id is",user.uid)
         if (docSnap.exists()) {
           setProfile(docSnap.data());
         } else {
@@ -39,7 +36,7 @@ const Dashboard = () => {
     };
 
     fetchProfile();
-  }, [user, navigate]); // Only runs when user or navigate changes
+  }, [user, navigate]);
 
   if (!user) {
     return (
@@ -67,7 +64,7 @@ const Dashboard = () => {
     <Container maxW="1200px" py="8">
       <VStack spacing="6" align="stretch">
         <Flex justify="space-between" align="center">
-          <Heading size="lg">Fitness Dashboard</Heading>
+          <Heading size="lg" color={textColor}>Fitness Dashboard</Heading>
           <Flex gap="4">
             <Button
               colorScheme="green"
@@ -84,7 +81,7 @@ const Dashboard = () => {
 
         {profile.location && (
           <Box mb="6" p="4" bg={bgColor} borderRadius="md" borderColor={borderColor} borderWidth={1}>
-            <Text fontSize="lg">
+            <Text fontSize="lg" color={textColor}>
               <strong>Location:</strong> City: {profile.city} lat: {profile.location.lat} lng: {profile.location.lng}
             </Text>
           </Box>
@@ -100,7 +97,7 @@ const Dashboard = () => {
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing="6">
           <Card variant="outline">
             <CardHeader>
-              <Heading size="md">Personal Information</Heading>
+              <Heading size="md" color={textColor}>Personal Information</Heading>
             </CardHeader>
             <CardBody>
               <VStack align="stretch" spacing="3">
@@ -115,7 +112,7 @@ const Dashboard = () => {
 
           <Card variant="outline">
             <CardHeader>
-              <Heading size="md">Body Measurements</Heading>
+              <Heading size="md" color={textColor}>Body Measurements</Heading>
             </CardHeader>
             <CardBody>
               <SimpleGrid columns={2} spacing="4">
@@ -131,15 +128,15 @@ const Dashboard = () => {
 
         <Card variant="outline">
           <CardHeader>
-            <Heading size="md">Specific Goals</Heading>
+            <Heading size="md" color={textColor}>Specific Goals</Heading>
           </CardHeader>
           <CardBody>
             <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing="4">
               {profile.specificGoals?.map((goal, index) => (
                 <Box key={index} p="3" borderRadius="md" bg={useColorModeValue("blue.50", "blue.900")}>
-                  <Text>✔ {goal}</Text>
+                  <Text color={textColor}>✔ {goal}</Text>
                 </Box>
-              )) || <Text>No specific goals set</Text>}
+              )) || <Text color={textColor}>No specific goals set</Text>}
             </SimpleGrid>
           </CardBody>
         </Card>
