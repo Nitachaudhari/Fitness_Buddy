@@ -146,7 +146,7 @@ Exercise instills discipline and time management skills, as individuals need to 
           -Consume protein-rich foods like eggs, yogurt, or protein shakes to aid muscle recovery.
           -Replenish glycogen stores with healthy carbs like brown rice or fruits.
         3.Hydration:
-          Drink water before, during, and after workouts to stay hydrated and maintain performance.`,
+          -Drink water before, during, and after workouts to stay hydrated and maintain performance.`,
       image: "https://ik.imagekit.io/d5ik6mphn/FitContent6.webp",
     },
     {

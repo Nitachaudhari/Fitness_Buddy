@@ -63,6 +63,7 @@ const Navbar = () => {
             </NavLink>
           </Box>
           
+          
           {/* Display Login if user is not logged in */}
           {!user ? (
   <Box as="li" mx={2}>
