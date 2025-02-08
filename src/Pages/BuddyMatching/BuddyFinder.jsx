@@ -13,7 +13,6 @@ const BuddyFinder = () => {
   const [loading, setLoading] = useState(true);
   const toast = useToast();
   const navigate = useNavigate();
-  const textColor = useColorModeValue("gray.800", "white");
   
   const [filters, setFilters] = useState({
     goalType: "",
@@ -44,9 +43,17 @@ const BuddyFinder = () => {
       setLoading(true);
       const usersRef = collection(db, "users");
       
-      // Base query
+      // Create base query
       let baseQuery = query(usersRef);
-
+      
+      // Add filters
+      if (filters.goalType) {
+        baseQuery = query(baseQuery, where("goalType", "==", filters.goalType));
+      }
+      if (filters.activityLevel) {
+        baseQuery = query(baseQuery, where("activityLevel", "==", filters.activityLevel));
+      }
+      
       const querySnapshot = await getDocs(baseQuery);
       const buddies = [];
 
@@ -227,7 +234,7 @@ const BuddyFinder = () => {
                         size="sm"
                         colorScheme="blue"
                         leftIcon={<Users size={16} />}
-                        onClick={() => navigate(`/message/${buddy.id}`)} // Navigate to messaging page
+                        onClick={() => buddy?.id && navigate(`/message/${buddy.id}`)}
                       >
                         Send Message
                       </Button>

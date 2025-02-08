@@ -58,7 +58,18 @@ const Navbar = () => {
               Tips
             </NavLink>
           </Box>
-
+          {/* <Box as="li" mx={2}>
+            <NavLink to="/about" activeclassname="active-link">
+              About us
+            </NavLink>
+          </Box>
+          <Box as="li" mx={2}>
+            <NavLink to="/contact" activeclassname="active-link">
+              Contact us
+            </NavLink>
+          </Box> */}
+          
+          
           {/* Display Login if user is not logged in */}
           {!user ? (
             <Box as="li" mx={2} color="white">

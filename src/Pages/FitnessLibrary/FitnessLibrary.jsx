@@ -19,7 +19,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { SearchIcon, SunIcon, MoonIcon, ArrowBackIcon } from '@chakra-ui/icons';
-import fitnessResources from './../../data/dataset';
+import fitnessResources from '../../data/dataset';
 
 const FitnessLibrary = () => {
   const [search, setSearch] = useState("");
