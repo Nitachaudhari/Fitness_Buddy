@@ -29,6 +29,8 @@ allowing them to find workout partners, share progress, and stay motivated in a 
 ## 📸 Project Screenshot
 
 ![FitnessBuddy_App Preview](https://your-image-link-here.com)
+![FitnessBuddy_App Preview](https://your-image-link-here.com)
+
 
 *(Replace the above URL with an actual screenshot of your project)*
 
