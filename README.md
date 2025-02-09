@@ -30,7 +30,7 @@ allowing them to find workout partners, share progress, and stay motivated in a 
 Frontend | Fullstack
 
 ## Deplolyed App
-Frontend: fitnessbuddy1.netlify.app
+Frontend: https://fitnessbuddy1.netlify.app/
 
 
 ## Video Walkthrough of the project
@@ -53,8 +53,6 @@ Frontend: fitnessbuddy1.netlify.app
 ![buddy find](https://github.com/user-attachments/assets/aa4cefc9-e8a1-4943-979a-82745d17e37a)
 ![workout tracker](https://github.com/user-attachments/assets/1e7a15a4-aa85-4420-84ed-c4527f3a0ade)
 ![tips](https://github.com/user-attachments/assets/aced04f9-c246-4363-a01c-c15e9107c5f7)
-
-
 
 ---
 
@@ -84,7 +82,6 @@ FitnessBuddy_App/
 - Arpit Patel  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)]() 
 - Tharun unnikrishnan  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)]() 
 -Omkar patane  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)]() 
-
 
 ---
 
@@ -120,24 +117,3 @@ npm run dev
 ```
 
 🎉 **Enjoy your fitness journey with FitnessBuddy!** 💪
-
-
-## Collaborators Clone & Work on the Project
-Once invited, collaborators can clone the repository using:
-
-git clone <repository-url>
-cd react-project
-npm install
-
-npm i @chakra-ui/react@2 @emotion/react @emotion/styled framer-motion
-
-npm i firebase
-npm i react-icons
-
-npm i lucide-react
-
-npm install react-router-dom
-
-npm install recharts
-npm install html2canvas
-npm install jspdf
