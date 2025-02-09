@@ -34,13 +34,13 @@ Frontend: https://fitnessbuddy1.netlify.app/
 
 
 ## Video Walkthrough of the project
-- 
+- https://youtu.be/BYQ6isDPW6A
 
 ## Video Walkthrough of the questionnaire
--
+- https://youtu.be/fXxKQOfGpKM
 
 ## Video Walkthrough of the codebase
--
+-https://youtu.be/-v7O1jGCdhI
 
 ---
 
