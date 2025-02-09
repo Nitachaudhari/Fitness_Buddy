@@ -34,7 +34,6 @@ const App = () => {
         <Route path="/progress-report" element={<ProgressReport />} />
         <Route path="/tips" element={<FitnessLibrary />} />
         <Route path='/contact' element={<ContactUs />} />
-        <Route path="/tips" element={<FitnessLibrary />} />
         <Route path="/message/:buddyId" element={<MessagePage />} />
 
         {/* <Route element={<ProtectedRoutes />}>

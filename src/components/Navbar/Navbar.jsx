@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Button, Box, Flex, Text, useColorMode, IconButton } from '@chakra-ui/react';
+import { 
+  Button, Box, Flex, Text, IconButton, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, useDisclosure, useColorMode 
+} from '@chakra-ui/react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from "react-router-dom";
-import { LogIn, LogOut, Moon, Sun } from 'lucide-react'; // Import the icons
+import { LogIn, LogOut, Moon, Sun, Menu } from 'lucide-react'; // Import icons
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode(); // Chakra UI hook for theme switching
+  const { isOpen, onOpen, onClose } = useDisclosure(); // Chakra UI hook for drawer
+  const [placement] = useState("left"); // Menu placement
 
   const handleLogout = async () => {
     try {
       await logout();
-      navigate("/home"); // Redirect to home page after logout
+      navigate("/home"); // Redirect to home after logout
     } catch (error) {
       console.error("Logout failed:", error.message);
     }
@@ -22,86 +26,109 @@ const Navbar = () => {
   return (
     <Box 
       as="nav" 
-      bg={colorMode === 'light' ? 'blue.500' : 'blue.700'} // Change bg color based on mode
-      color={colorMode === 'light' ? 'black' : 'white'} // Text color changes based on mode
+      bg={colorMode === 'light' ? 'blue.500' : 'blue.700'}
+      color="white"
       py={4}
-      position="sticky" 
-      top="0" 
-      fontWeight="bold"
-      zIndex="999" // Ensures the navbar stays above other content
+      position="sticky"
+      top="0"
+      zIndex="999"
     >
-      <Flex justify="space-between" align="center" maxW="1200px" mx="auto" color="white">
-        <Box>
-          <Text fontSize="2xl" fontWeight="bold" color="inherit">
-            🏋️‍♂️Fitness Buddy🏋️‍♂️
-          </Text>
-        </Box>
+      <Flex justify="space-between" align="center" maxW="1200px" mx="auto">
+        
+        {/* Hamburger Menu Icon (Visible on Small Screens) */}
+        <IconButton 
+          display={{ base: "block", md: "none" }} 
+          icon={<Menu />} 
+          aria-label="Open menu" 
+          onClick={onOpen}
+          variant="ghost"
+          color="white"
+        />
 
-        <Flex as="ul" listStyleType="none" spacing={4} align="center">
+        {/* Logo */}
+        <Text fontSize="2xl" fontWeight="bold">
+          🏋️‍♂️Fitness Buddy🏋️‍♂️
+        </Text>
+
+        {/* Navbar Links (Hidden on Mobile) */}
+        <Flex as="ul" listStyleType="none" spacing={4} align="center" display={{ base: "none", md: "flex" }}>
           <Box as="li" mx={2}>
-            <NavLink to="/" activeclassname="active-link">
-              Home
-            </NavLink>
+            <NavLink to="/">Home</NavLink>
           </Box>
           <Box as="li" mx={2}>
-            <NavLink to="/dashboard" activeclassname="active-link">
-              Dashboard
-            </NavLink>
+            <NavLink to="/dashboard">Dashboard</NavLink>
           </Box>
           <Box as="li" mx={2}>
-            <NavLink to="/workout-tracker" activeclassname="active-link">
-              Workout Tracker
-            </NavLink>
+            <NavLink to="/workout-tracker">Workout Tracker</NavLink>
           </Box>
           <Box as="li" mx={2}>
-            <NavLink to="/tips" activeclassname="active-link">
-              Tips
-            </NavLink>
+            <NavLink to="/tips">Tips</NavLink>
           </Box>
-          {/* <Box as="li" mx={2}>
-            <NavLink to="/about" activeclassname="active-link">
-              About us
-            </NavLink>
-          </Box>
-          <Box as="li" mx={2}>
-            <NavLink to="/contact" activeclassname="active-link">
-              Contact us
-            </NavLink>
-          </Box> */}
-          
-          
-          {/* Display Login if user is not logged in */}
+
+          {/* Login / Logout Button */}
           {!user ? (
-            <Box as="li" mx={2} color="white">
-              <NavLink to="/authform" activeclassname="active-link">
-                <Button rightIcon={<LogIn />} colorScheme="teal" color={colorMode === 'light' ? 'white' : 'white'}>
-                  Login
-                </Button>
+            <Box as="li" mx={2}>
+              <NavLink to="/authform">
+                <Button rightIcon={<LogIn />} colorScheme="teal">Login</Button>
               </NavLink>
             </Box>
           ) : (
-            // Display Logout if the user is logged in
-            <Box as="li" mx={2} >
-              <Button rightIcon={<LogOut />} colorScheme="red" color={colorMode === 'light' ? 'white' : 'white'} onClick={handleLogout}>
+            <Box as="li" mx={2}>
+              <Button rightIcon={<LogOut />} colorScheme="red" onClick={handleLogout}>
                 Logout
               </Button>
             </Box>
           )}
 
-          {/* Dark/Light Mode Toggle Button */}
+          {/* Theme Toggle Button */}
           <Box as="li" mx={2}>
             <IconButton
-              ml="20"
               icon={colorMode === 'light' ? <Moon /> : <Sun />}
               aria-label="Toggle theme"
               onClick={toggleColorMode}
               variant="ghost"
-              color={colorMode === 'light' ? 'white' : 'white'}
+              color="white"
               _hover={{ bg: 'transparent' }}
             />
           </Box>
         </Flex>
       </Flex>
+
+      {/* Hamburger Menu Drawer */}
+      <Drawer placement={placement} onClose={onClose} isOpen={isOpen}>
+        <DrawerOverlay />
+        <DrawerContent bg={colorMode === 'light' ? 'blue.500' : 'blue.700'} color="white">
+          <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
+          <DrawerBody>
+            <Flex flexDirection="column" gap={4}>
+              <NavLink to="/" onClick={onClose}>Home</NavLink>
+              <NavLink to="/dashboard" onClick={onClose}>Dashboard</NavLink>
+              <NavLink to="/workout-tracker" onClick={onClose}>Workout Tracker</NavLink>
+              <NavLink to="/tips" onClick={onClose}>Tips</NavLink>
+              
+              {!user ? (
+                <NavLink to="/authform" onClick={onClose}>
+                  <Button rightIcon={<LogIn />} colorScheme="teal" w="full">Login</Button>
+                </NavLink>
+              ) : (
+                <Button rightIcon={<LogOut />} colorScheme="red" onClick={() => { handleLogout(); onClose(); }} w="full">
+                  Logout
+                </Button>
+              )}
+
+              <IconButton
+                icon={colorMode === 'light' ? <Moon /> : <Sun />}
+                aria-label="Toggle theme"
+                onClick={toggleColorMode}
+                variant="ghost"
+                color="white"
+                _hover={{ bg: 'transparent' }}
+              />
+            </Flex>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+
     </Box>
   );
 };
