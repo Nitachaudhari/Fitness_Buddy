@@ -16,6 +16,7 @@ import FitnessLibrary from './Pages/FitnessLibrary/FitnessLibrary'
 import AboutUs from './Pages/AboutUs/About'
 import ProtectedRoutes from "./routes/ProtectedRoutes"
 import Chat from './components/Chat/Chat'
+import MessagePage from './Pages/Message/MessagePage'
 const App = () => {
   return (
     <div>
@@ -34,9 +35,10 @@ const App = () => {
         <Route path="/tips" element={<FitnessLibrary />} />
         <Route path='/contact' element={<ContactUs />} />
         <Route path="/tips" element={<FitnessLibrary />} />
-        <Route element={<ProtectedRoutes />}>
-          <Route path="/message/:buddyId" element={<Chat />} />
-        </Route>
+        <Route path="/message/:buddyId" element={<MessagePage />} />
+
+        {/* <Route element={<ProtectedRoutes />}>
+        </Route> */}
 
         {/* <Route path='/contact'element={<ContactUs/>}/> */}
         {/* <Route path="*" element={<NotFount />} /> */}

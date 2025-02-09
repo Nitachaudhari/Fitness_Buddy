@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { auth, db } from "../../services/firebase";
 import { useAuth } from "../../context/AuthContext";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { Box, Container, Heading, VStack, HStack, Button, useColorModeValue, Card, CardHeader, CardBody, Avatar, Text, Select, Slider, SliderTrack, SliderFilledTrack, SliderThumb, Tag, TagLabel, SimpleGrid, useToast, Progress } from "@chakra-ui/react";
+import { collection, query, where, getDocs, addDoc, doc, getDoc } from "firebase/firestore";
+import { Box, Container, Heading, VStack, HStack, Button, Card, CardHeader, CardBody, Avatar, Text, Select, Slider, SliderTrack, SliderFilledTrack, SliderThumb, Tag, TagLabel, SimpleGrid, useToast, Progress } from "@chakra-ui/react";
 import { Activity, MapPin, Target, Weight, Calendar, Users } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 
@@ -56,7 +56,7 @@ const BuddyFinder = () => {
       
       const querySnapshot = await getDocs(baseQuery);
       const buddies = [];
-
+      
       querySnapshot.forEach((doc) => {
         const buddyData = doc.data();
         // Filter out the current user and apply additional filters
@@ -67,7 +67,7 @@ const BuddyFinder = () => {
           });
         }
       });
-
+      
       setPotentialBuddies(buddies);
     } catch (error) {
       console.error("Error fetching buddies:", error);
@@ -83,52 +83,53 @@ const BuddyFinder = () => {
   };
 
   const matchesFilters = (buddy) => {
-    if (filters.goalType && buddy.goalType !== filters.goalType) return false;
-    if (filters.activityLevel && buddy.activityLevel !== filters.activityLevel) return false;
     if (filters.weeklyGoal && buddy.weeklyGoal !== filters.weeklyGoal) return false;
     if (filters.workoutFrequency && buddy.workoutFrequency !== filters.workoutFrequency) return false;
+    // Add more matching logic based on your needs
     return true;
   };
 
   const calculateCompatibility = (buddy) => {
     let score = 0;
     let factors = 0;
-
+    
     // Goal Type Match
     if (buddy.goalType === filters.goalType) {
       score += 30;
       factors++;
     }
-
+    
     // Activity Level Match
     if (buddy.activityLevel === filters.activityLevel) {
       score += 25;
       factors++;
     }
-
+    
     // Weekly Goal Match
     if (buddy.weeklyGoal === filters.weeklyGoal) {
       score += 20;
       factors++;
     }
-
+    
     // Workout Frequency Match
     if (buddy.workoutFrequency === filters.workoutFrequency) {
       score += 25;
       factors++;
     }
-
+    
     return factors > 0 ? Math.round((score / (factors * 100)) * 100) : 0;
   };
 
+  console.log(user)
+
   return (
-    <Container maxW="800px" py="4" >
+    <Container maxW="800px" py="4">
       <VStack spacing="4">
-        <Heading size="lg" color={textColor}>Find Your Fitness Buddy</Heading>
+        <Heading size="lg">Find Your Fitness Buddy</Heading>
 
         <Card w="full" variant="outline" size="sm">
-          <CardHeader pb="2" >
-            <Heading size="sm" color={textColor}>Filter Matches</Heading>
+          <CardHeader pb="2">
+            <Heading size="sm">Filter Matches</Heading>
           </CardHeader>
           <CardBody pt="0">
             <SimpleGrid columns={2} spacing="4">
@@ -137,7 +138,7 @@ const BuddyFinder = () => {
                 <Select
                   size="sm"
                   value={filters.goalType}
-                  onChange={(e) => setFilters({ ...filters, goalType: e.target.value })}
+                  onChange={(e) => setFilters({...filters, goalType: e.target.value})}
                 >
                   <option value="">Any Goal</option>
                   <option value="lose-weight">Lose Weight</option>
@@ -152,7 +153,7 @@ const BuddyFinder = () => {
                 <Select
                   size="sm"
                   value={filters.activityLevel}
-                  onChange={(e) => setFilters({ ...filters, activityLevel: e.target.value })}
+                  onChange={(e) => setFilters({...filters, activityLevel: e.target.value})}
                 >
                   <option value="">Any Level</option>
                   <option value="sedentary">Sedentary</option>
@@ -168,7 +169,7 @@ const BuddyFinder = () => {
                 <Select
                   size="sm"
                   value={filters.weeklyGoal}
-                  onChange={(e) => setFilters({ ...filters, weeklyGoal: e.target.value })}
+                  onChange={(e) => setFilters({...filters, weeklyGoal: e.target.value})}
                 >
                   <option value="">Any Goal</option>
                   <option value="0.25">0.25 kg/week</option>
@@ -182,7 +183,7 @@ const BuddyFinder = () => {
                 <Text fontSize="sm" mb="2">Distance Range: {filters.maxDistance}km</Text>
                 <Slider
                   value={filters.maxDistance}
-                  onChange={(v) => setFilters({ ...filters, maxDistance: v })}
+                  onChange={(v) => setFilters({...filters, maxDistance: v})}
                   min={1}
                   max={50}
                 >
@@ -207,7 +208,7 @@ const BuddyFinder = () => {
                     <Avatar size="lg" name={buddy.name} />
                     <VStack align="start" flex="1" spacing="2">
                       <HStack justify="space-between" w="full">
-                        <Heading size="md" color={textColor}>{buddy.name}</Heading>
+                        <Heading size="md">{buddy.name}</Heading>
                         <Tag colorScheme="green">
                           <TagLabel>{calculateCompatibility(buddy)}% Match</TagLabel>
                         </Tag>
@@ -234,7 +235,7 @@ const BuddyFinder = () => {
                         size="sm"
                         colorScheme="blue"
                         leftIcon={<Users size={16} />}
-                        onClick={() => buddy?.id && navigate(`/message/${buddy.id}`)}
+                        onClick={() => navigate(`/message/${buddy.id}`)} // Navigate to messaging page
                       >
                         Send Message
                       </Button>
