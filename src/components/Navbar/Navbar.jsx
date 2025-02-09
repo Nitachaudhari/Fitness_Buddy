@@ -46,30 +46,29 @@ const Navbar = () => {
         />
 
         {/* Logo */}
-        <Text fontSize="2xl" fontWeight="bold">
+        <Text fontSize="2xl" fontWeight="bold" color="white">
           🏋️‍♂️Fitness Buddy🏋️‍♂️
         </Text>
 
         {/* Navbar Links (Hidden on Mobile) */}
         <Flex as="ul" listStyleType="none" spacing={4} align="center" display={{ base: "none", md: "flex" }}>
-          <Box as="li" mx={2}>
-            <NavLink to="/">Home</NavLink>
-          </Box>
-          <Box as="li" mx={2}>
-            <NavLink to="/dashboard">Dashboard</NavLink>
-          </Box>
-          <Box as="li" mx={2}>
-            <NavLink to="/workout-tracker">Workout Tracker</NavLink>
-          </Box>
-          <Box as="li" mx={2}>
-            <NavLink to="/tips">Tips</NavLink>
-          </Box>
+          <Box as="li" mx={2}><NavLink to="/">Home</NavLink></Box>
+          <Box as="li" mx={2}><NavLink to="/dashboard">Dashboard</NavLink></Box>
+          <Box as="li" mx={2}><NavLink to="/workout-tracker">Workout Tracker</NavLink></Box>
+          <Box as="li" mx={2}><NavLink to="/tips">Tips</NavLink></Box>
 
           {/* Login / Logout Button */}
           {!user ? (
             <Box as="li" mx={2}>
               <NavLink to="/authform">
-                <Button rightIcon={<LogIn />} colorScheme="teal">Login</Button>
+                <Button 
+                  rightIcon={<LogIn />} 
+                  color="white" 
+                  borderColor="white" 
+                  variant="outline" 
+                >
+                  Login
+                </Button>
               </NavLink>
             </Box>
           ) : (
@@ -108,7 +107,15 @@ const Navbar = () => {
               
               {!user ? (
                 <NavLink to="/authform" onClick={onClose}>
-                  <Button rightIcon={<LogIn />} colorScheme="teal" w="full">Login</Button>
+                  <Button 
+                    rightIcon={<LogIn />} 
+                    color="white" 
+                    borderColor="white" 
+                    variant="outline" 
+                    w="full"
+                  >
+                    Login
+                  </Button>
                 </NavLink>
               ) : (
                 <Button rightIcon={<LogOut />} colorScheme="red" onClick={() => { handleLogout(); onClose(); }} w="full">
@@ -128,7 +135,6 @@ const Navbar = () => {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-
     </Box>
   );
 };

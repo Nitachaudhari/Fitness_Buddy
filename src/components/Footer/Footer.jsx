@@ -11,7 +11,7 @@ const Footer = () => {
                 <Stack direction={{ base: "column", md: "row" }} spacing={{ base: 10, md: 20 }} justify="space-between">
                     {/* Left Section - Logo and Links */}
                     <Box flex="" mb={{ base: 6, md: 0 }}>
-                        <Text fontSize="3xl" fontWeight="bold" letterSpacing="wider" color="black">
+                        <Text fontSize="2xl" fontWeight="bold" letterSpacing="wider" color="black">
                             Fitness Buddy
                         </Text>
                         <Stack spacing={4} mt={6}>
@@ -32,9 +32,9 @@ const Footer = () => {
                             Contact Information
                         </Text>
                         <Stack spacing={3} color="white">
-                            <Text fontSize="lg">Email: support@fitnessbuddy.com</Text>
-                            <Text fontSize="lg">Phone: (123) 456-7890</Text>
-                            <Text fontSize="lg">Address: 123 Fitness St, Wellness City, Country</Text>
+                            <Text fontSize="lg" color="white">Email: support@fitnessbuddy.com</Text>
+                            <Text fontSize="lg" color="white">Phone: (123) 456-7890</Text>
+                            <Text fontSize="lg" color="white">Address: 123 Fitness St, Wellness City, Country</Text>
                         </Stack>
                     </Box>
 
