@@ -26,13 +26,35 @@ allowing them to find workout partners, share progress, and stay motivated in a 
 
 ---
 
+## Project Type
+Frontend | Fullstack
+
+## Deplolyed App
+Frontend: fitnessbuddy1.netlify.app
+
+
+## Video Walkthrough of the project
+- 
+
+## Video Walkthrough of the questionnaire
+-
+
+## Video Walkthrough of the codebase
+-
+
+---
+
 ## 📸 Project Screenshot
 
-![FitnessBuddy_App Preview](https://your-image-link-here.com)
-![FitnessBuddy_App Preview](https://your-image-link-here.com)
+![Home page](https://github.com/user-attachments/assets/c3bfe852-5c1f-439e-bfb3-db82d6d4a22d)
+![login Signup](https://github.com/user-attachments/assets/a417794e-28af-4423-a03d-f44d07dec9c6)
+![create profile](https://github.com/user-attachments/assets/40f8d1e8-e0d8-4c2e-9233-d5efabfd77f7)
+![dashboard](https://github.com/user-attachments/assets/019d3096-2e90-46ce-b627-08f6bf6065e1)
+![buddy find](https://github.com/user-attachments/assets/aa4cefc9-e8a1-4943-979a-82745d17e37a)
+![workout tracker](https://github.com/user-attachments/assets/1e7a15a4-aa85-4420-84ed-c4527f3a0ade)
+![tips](https://github.com/user-attachments/assets/aced04f9-c246-4363-a01c-c15e9107c5f7)
 
 
-*(Replace the above URL with an actual screenshot of your project)*
 
 ---
 
